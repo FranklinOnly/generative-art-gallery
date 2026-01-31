@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>生成艺术画廊 | 算法创造的美丽</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Exo+2:wght@300;400;600&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.7.0/p5.min.js"></script>
+</head>
+<body>
+    <!-- 导航栏 -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <i class="fas fa-code-branch"></i>
+                <span>生成艺术画廊</span>
+            </div>
+            <div class="nav-links">
+                <a href="#gallery" class="nav-link active"><i class="fas fa-palette"></i> 画廊</a>
+                <a href="#about" class="nav-link"><i class="fas fa-info-circle"></i> 关于</a>
+                <a href="https://github.com" class="nav-link" target="_blank"><i class="fab fa-github"></i> GitHub</a>
+            </div>
+            <button class="theme-toggle" id="themeToggle">
+                <i class="fas fa-moon"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- 主内容 -->
+    <main class="container">
+        <!-- 标题区域 -->
+        <header class="hero">
+            <div class="hero-content">
+                <h1 class="hero-title">算法<span class="highlight">生成</span>艺术</h1>
+                <p class="hero-subtitle">代码创造的美学 · 无限可能的视觉</p>
+                <div class="hero-stats">
+                    <div class="stat">
+                        <span class="stat-number" id="artCount">4</span>
+                        <span class="stat-label">种艺术算法</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number infinite">∞</span>
+                        <span class="stat-label">种独特图案</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number">100%</span>
+                        <span class="stat-label">实时生成</span>
+                    </div>
+                </div>
+            </div>
+            <div class="hero-canvas" id="heroCanvas"></div>
+        </header>
+
+        <!-- 画廊 -->
+        <section class="gallery-section" id="gallery">
+            <h2 class="section-title">艺术生成器</h2>
+            <p class="section-subtitle">点击任意卡片开始体验，每个作品都是实时算法生成</p>
+            
+            <div class="gallery-grid">
+                <!-- 卡片1: 粒子系统 -->
+                <div class="art-card" data-art="particles">
+                    <div class="art-card-header">
+                        <div class="art-icon">
+                            <i class="fas fa-atom"></i>
+                        </div>
+                        <h3>粒子流动场</h3>
+                    </div>
+                    <div class="art-card-canvas" id="card1"></div>
+                    <div class="art-card-desc">
+                        <p>模拟数千个粒子在力场中的流动，每帧都是独一无二的图案</p>
+                        <div class="art-tags">
+                            <span class="tag">物理模拟</span>
+                            <span class="tag">Flow Field</span>
+                        </div>
+                    </div>
+                    <button class="art-card-btn" data-art="particles">
+                        <i class="fas fa-expand"></i> 全屏体验
+                    </button>
+                </div>
+
+                <!-- 卡片2: 分形树 -->
+                <div class="art-card" data-art="fractals">
+                    <div class="art-card-header">
+                        <div class="art-icon">
+                            <i class="fas fa-tree"></i>
+                        </div>
+                        <h3>递归分形树</h3>
+                    </div>
+                    <div class="art-card-canvas" id="card2"></div>
+                    <div class="art-card-desc">
+                        <p>基于递归算法生成的无限精细分形结构，展现数学之美</p>
+                        <div class="art-tags">
+                            <span class="tag">递归算法</span>
+                            <span class="tag">L-system</span>
+                        </div>
+                    </div>
+                    <button class="art-card-btn" data-art="fractals">
+                        <i class="fas fa-expand"></i> 全屏体验
+                    </button>
+                </div>
+
+                <!-- 卡片3: 噪声艺术 -->
+                <div class="art-card" data-art="noise">
+                    <div class="art-card-header">
+                        <div class="art-icon">
+                            <i class="fas fa-mountain"></i>
+                        </div>
+                        <h3>柏林噪声地形</h3>
+                    </div>
+                    <div class="art-card-canvas" id="card3"></div>
+                    <div class="art-card-desc">
+                        <p>使用柏林噪声算法生成自然有机的纹理和地形</p>
+                        <div class="art-tags">
+                            <span class="tag">Perlin Noise</span>
+                            <span class="tag">自然模拟</span>
+                        </div>
+                    </div>
+                    <button class="art-card-btn" data-art="noise">
+                        <i class="fas fa-expand"></i> 全屏体验
+                    </button>
+                </div>
+
+                <!-- 卡片4: 流场 -->
+                <div class="art-card" data-art="flow">
+                    <div class="art-card-header">
+                        <div class="art-icon">
+                            <i class="fas fa-wind"></i>
+                        </div>
+                        <h3>向量流场</h3>
+                    </div>
+                    <div class="art-card-canvas" id="card4"></div>
+                    <div class="art-card-desc">
+                        <p>动态向量场引导线条流动，创造流体般的视觉体验</p>
+                        <div class="art-tags">
+                            <span class="tag">向量场</span>
+                            <span class="tag">流体模拟</span>
+                        </div>
+                    </div>
+                    <button class="art-card-btn" data-art="flow">
+                        <i class="fas fa-expand"></i> 全屏体验
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- 全屏查看器 -->
+        <div class="fullscreen-viewer" id="fullscreenViewer">
+            <div class="viewer-header">
+                <h2 id="viewerTitle">粒子流动场</h2>
+                <div class="viewer-controls">
+                    <button class="control-btn" id="pauseBtn">
+                        <i class="fas fa-pause"></i>
+                    </button>
+                    <button class="control-btn" id="refreshBtn">
+                        <i class="fas fa-redo"></i>
+                    </button>
+                    <button class="control-btn" id="saveBtn">
+                        <i class="fas fa-download"></i>
+                    </button>
+                    <button class="control-btn" id="closeViewer">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="viewer-canvas" id="fullscreenCanvas"></div>
+            <div class="viewer-control-panel" id="controlPanel">
+                <div class="control-group">
+                    <label for="colorScheme">色彩方案</label>
+                    <select id="colorScheme">
+                        <option value="rainbow">彩虹渐变</option>
+                        <option value="monochrome">单色系</option>
+                        <option value="pastel">柔和粉彩</option>
+                        <option value="neon">霓虹夜色</option>
+                    </select>
+                </div>
+                <div class="control-group">
+                    <label for="speedControl">动画速度</label>
+                    <input type="range" id="speedControl" min="0.1" max="2" step="0.1" value="1">
+                </div>
+                <div class="control-group">
+                    <label for="densityControl">粒子密度</label>
+                    <input type="range" id="densityControl" min="10" max="500" step="10" value="200">
+                </div>
+                <div class="info-panel">
+                    <p>每帧实时生成 · 永不重复</p>
+                    <p class="fps-counter">FPS: <span id="fps">60</span></p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 关于 -->
+        <section class="about-section" id="about">
+            <h2 class="section-title">关于生成艺术</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <p>生成艺术是使用算法和自主系统创作的艺术形式。艺术家编写代码，定义规则和参数，然后让计算机执行这些规则，创造出通常具有不可预测性和独特性的艺术作品。</p>
+                    <p>这个画廊展示了四种不同的生成艺术算法，所有作品都是实时在您的浏览器中生成。每次刷新都会创建全新的、独一无二的艺术作品。</p>
+                    <div class="tech-stack">
+                        <h3><i class="fas fa-cogs"></i> 技术栈</h3>
+                        <div class="tech-icons">
+                            <div class="tech-item">
+                                <i class="fab fa-js-square"></i>
+                                <span>JavaScript</span>
+                            </div>
+                            <div class="tech-item">
+                                <i class="fas fa-code"></i>
+                                <span>p5.js</span>
+                            </div>
+                            <div class="tech-item">
+                                <i class="fab fa-html5"></i>
+                                <span>HTML5</span>
+                            </div>
+                            <div class="tech-item">
+                                <i class="fab fa-css3-alt"></i>
+                                <span>CSS3</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="about-code">
+                    <div class="code-block">
+                        <pre><code>// 生成艺术的核心代码示例
+function drawFractal(x, y, len, angle) {
+    if (len < 5) return;
+    
+    let x2 = x + len * cos(angle);
+    let y2 = y + len * sin(angle);
+    
+    line(x, y, x2, y2);
+    
+    // 递归调用，创造分形
+    drawFractal(x2, y2, len * 0.67, angle - PI/6);
+    drawFractal(x2, y2, len * 0.67, angle + PI/6);
+}</code></pre>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- 页脚 -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3><i class="fas fa-magic"></i> 生成艺术画廊</h3>
+                <p>算法与美学的交汇点</p>
+                <p class="footer-links">
+                    <a href="https://github.com" target="_blank"><i class="fab fa-github"></i></a>
+                    <a href="https://p5js.org" target="_blank"><i class="fas fa-paint-brush"></i></a>
+                    <a href="https://generativeartistry.com" target="_blank"><i class="fas fa-globe"></i></a>
+                </p>
+            </div>
+            <div class="footer-section">
+                <h3><i class="fas fa-code"></i> 开源代码</h3>
+                <p>本项目完全开源，欢迎贡献代码或创意</p>
+                <a href="https://github.com" class="github-btn" target="_blank">
+                    <i class="fab fa-github"></i> 查看源码
+                </a>
+            </div>
+            <div class="footer-section">
+                <h3><i class="fas fa-info-circle"></i> 说明</h3>
+                <p>所有艺术作品均在浏览器中实时生成，不占用服务器资源。建议使用现代浏览器以获得最佳体验。</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2023 生成艺术画廊 | 代码创造的美学 | 部署于 GitHub Pages</p>
+        </div>
+    </footer>
+
+    <script src="artworks/particles.js"></script>
+    <script src="artworks/fractals.js"></script>
+    <script src="artworks/flow-field.js"></script>
+    <script src="artworks/noise-art.js"></script>
+    <script src="script.js"></script>
+    <!-- 在引入主script.js之前，先引入艺术算法 -->
+   
+</body>
+</html>
